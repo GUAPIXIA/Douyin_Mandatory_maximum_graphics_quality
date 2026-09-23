@@ -1,0 +1,56 @@
+{
+  "$comment": "抖音画质助手 - 抖音版本兼容性清单（唯一数据源）",
+  "$howItWorks": [
+    "每个抖音版本用『官方文件哈希』作为指纹：app.asar 与 app.asar.unpacked\\preload.js。",
+    "app.asar 我们从不修改，所以它的哈希可以随时跟 md5.json 对账（证明版本没被我们自己改过）。",
+    "preload.js 是注入目标，其哈希只在『未打补丁』时有意义，因此安装时会先固化一份原始副本。",
+    "三个状态：verified=这个精确版本实测通过；compatible=结构相同、可用但未实测；unsupported=已知不兼容。"
+  ],
+  "tool": {
+    "name": "douyin-quality-helper",
+    "version": "1.0.0",
+    "releasedAt": "2026-09-23",
+    "description": "让抖音 PC 版每个视频都按可用的最高清晰度（4K/2K/1080P）播放"
+  },
+  "injection": {
+    "target": "resources\\app.asar.unpacked\\preload.js",
+    "targetOfficialMd5": "bfcb8e31fae5a7370c5bee258ffcdfad",
+    "markBegin": "/* ==== DY_FORCE_INJECTOR_BEGIN ==== */",
+    "markEnd": "/* ==== DY_FORCE_INJECTOR_END ==== */"
+  },
+  "requirements": {
+    "electronMajor": 36,
+    "electronVersion": "36.4.0-rs.33.release.pgo.0",
+    "webPlayerStorageKey": "MANUAL_SWITCH",
+    "notes": [
+      "抖音 PC 版是 Electron 外壳 + 内嵌 www.douyin.com 网页播放器。",
+      "清晰度偏好存在网页的 sessionStorage 键 MANUAL_SWITCH，重启即丢失，所以必须每次开页强制。",
+      "注入点是 asar 之外的那个 preload.js（它才真正挂到 www.douyin.com，且 isolated=false）。"
+    ]
+  },
+  "versions": [
+    {
+      "version": "8.7.0",
+      "status": "verified",
+      "testedAt": "2026-09-23",
+      "toolVersion": "1.0.0",
+      "electronVersion": "36.4.0-rs.33.release.pgo.0",
+      "md5": {
+        "appAsar": "71754e1cd7c2d4ffb25c0ffed685ce23",
+        "preload": "bfcb8e31fae5a7370c5bee258ffcdfad"
+      },
+      "signatures": {
+        "pristinePreloadSize": 41345,
+        "md5JsonEntries": 1093
+      },
+      "verified": [],
+      "knownIssues": []
+    }
+  ],
+  "policy": {
+    "onUnknownVersion": "allow-with-warning",
+    "onHashMismatch": "allow-with-warning",
+    "onUnsupportedVersion": "refuse",
+    "rationale": "注入只依赖『这个 preload 会挂到 www.douyin.com』这一结构事实，与具体版本号无关；因此新版默认允许并警告，由用户实测决定。已知不兼容的版本才拒绝。"
+  }
+}

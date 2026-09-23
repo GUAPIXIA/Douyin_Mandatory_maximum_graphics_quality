@@ -1,0 +1,22 @@
+# 行尾规范化
+# 仓库内一律存 LF；检出到 Windows 时用 CRLF。
+# 例外：.bat 必须是 CRLF —— cmd.exe 对 LF-only 的批处理会解析错乱。
+* text=auto eol=crlf
+
+*.bat text eol=crlf
+*.ps1 text eol=crlf
+*.psm1 text eol=crlf
+*.xaml text eol=crlf
+
+*.js  text eol=lf
+*.json text eol=lf
+*.md  text eol=lf
+*.yml text eol=lf
+
+# 二进制
+*.png binary
+*.ico binary
+*.asar binary
+*.node binary
+*.dll binary
+*.exe binary

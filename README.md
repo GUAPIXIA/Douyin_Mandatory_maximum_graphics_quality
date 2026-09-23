@@ -2,6 +2,8 @@
 
 **工具版本：1.0.0** ｜ [更新日志](CHANGELOG.md) ｜ 版本清单 [versions.json](versions.json) ｜ [MIT License](LICENSE)
 
+仓库：<https://github.com/GUAPIXIA/Douyin_Mandatory_maximum_graphics_quality>
+
 让抖音 PC 客户端**每个视频都按该视频可用的最高清晰度播放**（4K → 2K → 1080P），
 不再被默认的"智能"档压到 1080P。
 

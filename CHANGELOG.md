@@ -9,6 +9,28 @@
 
 ---
 
+## [1.1.0] - 2026-09-28
+
+**面向小白的单文件 EXE 发布包**（`dist\抖音画质助手.exe`）。
+
+### 新增
+
+- **C# WPF 单文件 EXE**（`.NET Framework 4.8`，`csc` 直接编译，约 60KB）
+  - 双击即用：不需要 Node.js，不需要 PowerShell，无执行策略问题
+  - 界面与功能对齐 `gui.xaml`：选路径 / 一键启用 / 还原 / 检查 / 版本状态
+  - 注入实现内嵌于 EXE，与 `tools/patch-preload.js` **字节级一致**（已用原始 preload 对拍）
+  - 配置、备份、`versions.json` 都放在 **EXE 同目录**（便携绿色包）
+- **无头自检**：`抖音画质助手.exe --selftest`
+- **兼容 CLI 的补丁入口**：`--patch --src --payload --out`（便于与 Node 对拍）
+- 构建脚本：`exe-src/build.ps1`、`exe-src/pack.ps1`
+
+### 说明
+
+- 旧入口（`启动画质助手.bat` + PowerShell）仍保留，便于开发调试
+- 发布包内容：`抖音画质助手.exe` + `使用说明.txt` + `versions.json`
+
+---
+
 ## [1.0.0] - 2026-09-23
 
 首个可用版本。核心能力：**让抖音 PC 版每个视频都按该视频可用的最高清晰度播放（4K → 2K → 1080P）**。
